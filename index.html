@@ -381,7 +381,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/20/HTML+CSS一些知识点/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2018/05/20/HTML+CSS一些知识点/" itemprop="url">html,css一些知识点（随时补充）</a></h1>
         
 
         <div class="post-meta">
@@ -464,9 +464,7 @@
       
         
           
-            <h1 id="HTML-CSS"><a href="#HTML-CSS" class="headerlink" title="HTML+CSS"></a>HTML+CSS</h1><p>标签（空格分隔）： 未分类</p>
-<hr>
-<ol>
+            <ol>
 <li>html5优点和缺点<blockquote>
 <p>   优点：    a、网络标准统一、HTML5本身是由W3C推荐出来的。</p>
 <pre><code>b、多设备、跨平台 
@@ -601,7 +599,7 @@ e、浏览器兼容性：最大缺点，IE9以下浏览器几乎全军覆没。
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/16/Ajax和跨域问题/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2018/05/16/Ajax和跨域问题/" itemprop="url">ajax回顾总结</a></h1>
         
 
         <div class="post-meta">
@@ -684,9 +682,7 @@ e、浏览器兼容性：最大缺点，IE9以下浏览器几乎全军覆没。
       
         
           
-            <h1 id="在此处输入标题"><a href="#在此处输入标题" class="headerlink" title="在此处输入标题"></a>在此处输入标题</h1><p>标签（空格分隔）： 未分类</p>
-<hr>
-<p>简单的总结下ajax和跨域问题。</p>
+            <p>简单的总结下ajax和跨域问题。</p>
 <p>手写原生ajax算是比较高频的面试题了，目的就是看你是否明白其原理。<br>首先是XMLHttpRequest对象，现代浏览器均支持（IE5 和 IE6 使用 ActiveXObject）。它是一个window对象。它的reponseText属性可以获取返回数据。readyState和status属性可以标识返回状态。<br>onreadystatechange是一个事件，或者说一个函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var request = new XMLHttpRequset();</span><br><span class="line">request.onreadystatechange = function () &#123;</span><br><span class="line">	if (request.readyState ==4 &amp;&amp; request.status == 200) &#123;</span><br><span class="line">			alert(requset.reponseText)//成功，返回reponseText</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">			alert(requset.status)  //失败，返回错误状态码</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">requset.get(&apos;GET&apos;, url, true) ;//默认为true，可不写。表示异步</span><br><span class="line">requset.send()</span><br></pre></td></tr></table></figure></p>
 <ol>
 <li>jsonp跨域。<br>原理：利用script标签可跨域的特性。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onclick=&quot;getPrice()&quot;&gt;点击刷新&lt;/button&gt;</span><br><span class="line">&lt;p id=&quot;test&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
@@ -1136,8 +1132,8 @@ e、浏览器兼容性：最大缺点，IE9以下浏览器几乎全军覆没。
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/科技/" itemprop="url" rel="index">
-                    <span itemprop="name">科技</span>
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
                   </a>
                 </span>
 
@@ -1816,7 +1812,7 @@ e、浏览器兼容性：最大缺点，IE9以下浏览器几乎全军覆没。
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1827,7 +1823,7 @@ e、浏览器兼容性：最大缺点，IE9以下浏览器几乎全军覆没。
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

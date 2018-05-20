@@ -132,7 +132,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ajax," />
 
 
 
@@ -145,17 +145,18 @@
 
 
 
-<meta name="description" content="在此处输入标题标签（空格分隔）： 未分类  简单的总结下ajax和跨域问题。 手写原生ajax算是比较高频的面试题了，目的就是看你是否明白其原理。首先是XMLHttpRequest对象，现代浏览器均支持（IE5 和 IE6 使用 ActiveXObject）。它是一个window对象。它的reponseText属性可以获取返回数据。readyState和status属性可以标识返回状态。onrea">
+<meta name="description" content="简单的总结下ajax和跨域问题。 手写原生ajax算是比较高频的面试题了，目的就是看你是否明白其原理。首先是XMLHttpRequest对象，现代浏览器均支持（IE5 和 IE6 使用 ActiveXObject）。它是一个window对象。它的reponseText属性可以获取返回数据。readyState和status属性可以标识返回状态。onreadystatechange是一个事件，或者说">
+<meta name="keywords" content="ajax">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Sean">
+<meta property="og:title" content="ajax回顾总结">
 <meta property="og:url" content="http://yoursite.com/2018/05/16/Ajax和跨域问题/index.html">
 <meta property="og:site_name" content="Sean">
-<meta property="og:description" content="在此处输入标题标签（空格分隔）： 未分类  简单的总结下ajax和跨域问题。 手写原生ajax算是比较高频的面试题了，目的就是看你是否明白其原理。首先是XMLHttpRequest对象，现代浏览器均支持（IE5 和 IE6 使用 ActiveXObject）。它是一个window对象。它的reponseText属性可以获取返回数据。readyState和status属性可以标识返回状态。onrea">
+<meta property="og:description" content="简单的总结下ajax和跨域问题。 手写原生ajax算是比较高频的面试题了，目的就是看你是否明白其原理。首先是XMLHttpRequest对象，现代浏览器均支持（IE5 和 IE6 使用 ActiveXObject）。它是一个window对象。它的reponseText属性可以获取返回数据。readyState和status属性可以标识返回状态。onreadystatechange是一个事件，或者说">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-16T04:44:13.663Z">
+<meta property="og:updated_time" content="2018-05-20T01:25:23.815Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sean">
-<meta name="twitter:description" content="在此处输入标题标签（空格分隔）： 未分类  简单的总结下ajax和跨域问题。 手写原生ajax算是比较高频的面试题了，目的就是看你是否明白其原理。首先是XMLHttpRequest对象，现代浏览器均支持（IE5 和 IE6 使用 ActiveXObject）。它是一个window对象。它的reponseText属性可以获取返回数据。readyState和status属性可以标识返回状态。onrea">
+<meta name="twitter:title" content="ajax回顾总结">
+<meta name="twitter:description" content="简单的总结下ajax和跨域问题。 手写原生ajax算是比较高频的面试题了，目的就是看你是否明白其原理。首先是XMLHttpRequest对象，现代浏览器均支持（IE5 和 IE6 使用 ActiveXObject）。它是一个window对象。它的reponseText属性可以获取返回数据。readyState和status属性可以标识返回状态。onreadystatechange是一个事件，或者说">
 
 
 
@@ -191,7 +192,7 @@
 
 
 
-  <title> | Sean</title>
+  <title>ajax回顾总结 | Sean</title>
   
 
 
@@ -379,7 +380,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">ajax回顾总结</h1>
         
 
         <div class="post-meta">
@@ -460,9 +461,7 @@
       
 
       
-        <h1 id="在此处输入标题"><a href="#在此处输入标题" class="headerlink" title="在此处输入标题"></a>在此处输入标题</h1><p>标签（空格分隔）： 未分类</p>
-<hr>
-<p>简单的总结下ajax和跨域问题。</p>
+        <p>简单的总结下ajax和跨域问题。</p>
 <p>手写原生ajax算是比较高频的面试题了，目的就是看你是否明白其原理。<br>首先是XMLHttpRequest对象，现代浏览器均支持（IE5 和 IE6 使用 ActiveXObject）。它是一个window对象。它的reponseText属性可以获取返回数据。readyState和status属性可以标识返回状态。<br>onreadystatechange是一个事件，或者说一个函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var request = new XMLHttpRequset();</span><br><span class="line">request.onreadystatechange = function () &#123;</span><br><span class="line">	if (request.readyState ==4 &amp;&amp; request.status == 200) &#123;</span><br><span class="line">			alert(requset.reponseText)//成功，返回reponseText</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">			alert(requset.status)  //失败，返回错误状态码</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">requset.get(&apos;GET&apos;, url, true) ;//默认为true，可不写。表示异步</span><br><span class="line">requset.send()</span><br></pre></td></tr></table></figure></p>
 <ol>
 <li>jsonp跨域。<br>原理：利用script标签可跨域的特性。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onclick=&quot;getPrice()&quot;&gt;点击刷新&lt;/button&gt;</span><br><span class="line">&lt;p id=&quot;test&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
@@ -493,6 +492,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/ajax/" rel="tag"># ajax</a>
+          
+        </div>
+      
 
       
       
@@ -512,8 +517,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/20/HTML+CSS一些知识点/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/20/HTML+CSS一些知识点/" rel="prev" title="html,css一些知识点（随时补充）">
+                html,css一些知识点（随时补充） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -571,17 +576,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -611,7 +607,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -622,7 +618,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -852,22 +848,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在此处输入标题"><span class="nav-number">1.</span> <span class="nav-text">在此处输入标题</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
