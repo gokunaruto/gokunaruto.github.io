@@ -362,6 +362,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/tags- 数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sean">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/tags- 数组/" itemprop="url">数组相关面试题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T12:37:01+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,394
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-统计一个字符串中出现最多的字符。"><a href="#1-统计一个字符串中出现最多的字符。" class="headerlink" title="1. 统计一个字符串中出现最多的字符。"></a>1. 统计一个字符串中出现最多的字符。</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var str = &apos;wangxiaoaiwangxiaoting&apos;;</span><br><span class="line">var o = &#123;&#125;;</span><br><span class="line">for(var i = 0; i &lt; str.length; i++) &#123;</span><br><span class="line">	var char = str.charAt(i);</span><br><span class="line">// console.log(char);</span><br><span class="line">	if(o[char])&#123;     //obj.name 和 obj[&apos;name&apos;]</span><br><span class="line">		o[char]++  //如果对象有这个属性了，就给这个属性自增1</span><br><span class="line">&#125;else&#123;</span><br><span class="line">		o[char] = 1  //如果对象没这个属性，就个这个属性值设为1</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(o);</span><br><span class="line">var num = 0;</span><br><span class="line">var number = &apos;&apos;;</span><br><span class="line">for (var i in o) &#123; //for in循环 遍历对象的属性和方法</span><br><span class="line">	if(num &lt; o[i])&#123;</span><br><span class="line">		num = o[i];</span><br><span class="line">		number = i</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(&apos;最多出现的字符是:&apos;+number+&apos;,&apos;+&apos;次数是&apos;+num)</span><br></pre></td></tr></table></figure>
+<h2 id="2-数组去重的几种方法"><a href="#2-数组去重的几种方法" class="headerlink" title="2. 数组去重的几种方法"></a>2. 数组去重的几种方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,1,2,2,7,5,7,5,4,3,3,4,&apos;a&apos;,&apos;c&apos;,&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;b&apos;]</span><br><span class="line">		//方法一：利用对象属性的存在的特性，如果没有该属性则存入数组</span><br><span class="line">		function unique1(arr) &#123;</span><br><span class="line">			var res = [];</span><br><span class="line">			var obj = &#123;&#125;;</span><br><span class="line">			for(var i = 0; i&lt;arr.length; i++)&#123;</span><br><span class="line">				if(!obj[arr[i]])&#123;   //obj[arr[i]]为obj对象的属性值</span><br><span class="line">					obj[arr[i]] = 1;</span><br><span class="line">					res.push(arr[i])</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			return res;</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(unique1(arr));</span><br><span class="line"></span><br><span class="line">		//方法二：利用数组的indexOf</span><br><span class="line">		function unqiue2(arr) &#123;</span><br><span class="line">			var res = [];</span><br><span class="line">			for(var i = 0; i&lt;arr.length; i++)&#123;</span><br><span class="line">				if(res.indexOf(arr[i])==-1)&#123;  //或 arr.indexOf(arr[i])==i,即arr[i]第一次出现就push进res，再次出现就不符合条件，不再push。</span><br><span class="line">					res.push(arr[i])</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			return res;</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(unqiue2(arr));</span><br><span class="line"></span><br><span class="line">		//方法三：数组原型对象上的的includes方法</span><br><span class="line">		function unique3(arr) &#123;</span><br><span class="line">			var res = [];</span><br><span class="line">			for(var i = 0 ;i &lt; arr.length; i++)&#123;</span><br><span class="line">				if(!res.includes(arr[i]))&#123;</span><br><span class="line">					res.push(arr[i])</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			return res;</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(unique3(arr));</span><br><span class="line"></span><br><span class="line">		//方法四：排序后相邻去重 思路：原数组排序，排序后相同值相邻，然后遍历时新数组只传入不与前一个值相同的值</span><br><span class="line">		function unique4(arr) &#123;</span><br><span class="line">			arr.sort();  //排序后arr已经改变了</span><br><span class="line">			var res = [arr[0]];</span><br><span class="line">			for(var i = 1; i&lt;arr.length; i++)&#123;</span><br><span class="line">				if(arr[i] !== res[res.length-1])&#123;</span><br><span class="line">					res.push(arr[i])</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			return res;</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(unique4(arr));</span><br><span class="line"></span><br><span class="line">		//方法五：优化遍历数组</span><br><span class="line">		function unique5(arr) &#123;</span><br><span class="line">			var res = [];</span><br><span class="line">			for(var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">				for(var j = i+1; j &lt; arr.length; j++)&#123;</span><br><span class="line">					if(arr[i] == arr[j])&#123;</span><br><span class="line">						 ++ i;  //与右边的元素依次比较，若有重复，则跳出内层循环，重新开始。</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					res.push(arr[i])</span><br><span class="line">				&#125;</span><br><span class="line">				return res;</span><br><span class="line">			&#125;</span><br><span class="line">			console.log(unique5(arr))</span><br><span class="line"></span><br><span class="line">		//方法六：ES6 Set数据结构类似于数组，其成员都是唯一的 IE系列不兼容</span><br><span class="line">		function unique6(arr) &#123;</span><br><span class="line">			// return Array.from(new Set(arr)) ;//Array.from 将Set结构转换成数组</span><br><span class="line">			return [...(new Set(arr))]	</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(unique6(arr))</span><br><span class="line"></span><br><span class="line">		//方法七：ES6 </span><br><span class="line">		function unique7(arr) &#123;</span><br><span class="line">			const res = new Map();</span><br><span class="line">			return arr.filter((a)=&gt;!res.has(a)&amp;&amp;res.set(a,1))</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(unique7(arr));</span><br></pre></td></tr></table></figure>
+<h2 id="3-数组clone-深、浅拷贝"><a href="#3-数组clone-深、浅拷贝" class="headerlink" title="3. 数组clone(深、浅拷贝)"></a>3. 数组clone(深、浅拷贝)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var arr1 = arr.concat();//方法1 concat()，深拷贝</span><br><span class="line">var arr2 = arr.slice(0);//方法2	slice()，深拷贝</span><br><span class="line">var arr3 = [];			//方法3	for循环,浅拷贝</span><br><span class="line">for(var i in arr)&#123;</span><br><span class="line">	arr3[i] = arr[i]</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * 深拷贝 ,如果数组里含有对象</span><br><span class="line"> */</span><br><span class="line">function deepClone(arr) &#123;</span><br><span class="line">	var res = [];</span><br><span class="line">	for (var i in arr)&#123;</span><br><span class="line">		if (typeof arr[i] === &apos;object&apos;) &#123; //如果含有对象，则递归</span><br><span class="line">			res[i] = deepClone(arr[i])</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			res[i] = arr[i]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-找出数组中的最大值"><a href="#4-找出数组中的最大值" class="headerlink" title="4. 找出数组中的最大值"></a>4. 找出数组中的最大值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var arrMax = [1,2,3,4,5];</span><br><span class="line">//1.for循环,古老的写法，遍历之后取最大值</span><br><span class="line">var arrRes = arrMax[0];</span><br><span class="line">for(var i = 1 ;i &lt;arrMax.length; i++)&#123;</span><br><span class="line">	var result = Math.max(arrRes,arrMax[i]) </span><br><span class="line">&#125;</span><br><span class="line">console.log(result)</span><br><span class="line">//2.Math最大值。用到apply方法，可以将数组转换成参数列表再调用Math方法</span><br><span class="line">Math.max.apply(null,arrMax)</span><br><span class="line">//3.sort()</span><br><span class="line">arrMax.sort((num1,num2) =&gt; &#123;return num2-num1&#125;)[0] //或者sort()后reverse() </span><br><span class="line">//4.reduce()</span><br><span class="line">arrMax.reduce((num1,num2) =&gt; &#123;return num1 &gt; num2 ? num1 : num2&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="5-数组降维"><a href="#5-数组降维" class="headerlink" title="5. 数组降维"></a>5. 数组降维</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var arrDown = [[1,2,3],[4,5],[9,8,7]];</span><br><span class="line">		//1.二维数组，双层遍历</span><br><span class="line">		function down(arr) &#123;</span><br><span class="line">			var resDown = [];</span><br><span class="line">			for(var i = 0;i &lt; arr.length; i++)&#123;</span><br><span class="line">				for (var j = 0; j &lt; arr[i].length; j++)&#123;</span><br><span class="line">					resDown.push(arr[i][j])</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			return resDown</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(down(arrDown))</span><br><span class="line">		//2.concat()</span><br><span class="line">		function down2(arr) &#123;</span><br><span class="line">			var resDown = [];</span><br><span class="line">			for(var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">				resDown = resDown.concat(arr[i])</span><br><span class="line">			&#125;</span><br><span class="line">			return resDown</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(down2(arrDown))</span><br><span class="line">		//3.concat()和apply()结合</span><br><span class="line">		function down3(arr) &#123;</span><br><span class="line">			var resDown = [];</span><br><span class="line">			return Array.prototype.concat.apply(resDown,arr)</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(down3(arrDown))</span><br></pre></td></tr></table></figure>
+<h2 id="6-数组排序"><a href="#6-数组排序" class="headerlink" title="6. 数组排序"></a>6. 数组排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">//1.冒泡排序</span><br><span class="line">var arrs = [3,2,5,9,1,6,33,4,65,22];</span><br><span class="line">var temp = 0;</span><br><span class="line">for(var i = 0; i &lt; arrs.length; i++)&#123;</span><br><span class="line">	for(var j = i+1; j &lt; arrs.length;j++)&#123; </span><br><span class="line">	     if(arrs[i] &gt; arrs[j])&#123; //相邻比较，如果前一个大，就调换位置</span><br><span class="line">			temp = arrs[i];//temp储存前一个大的数</span><br><span class="line">			arrs[i] = arrs[j];//前一个换成小的那个数</span><br><span class="line">			arrs[j] = temp//将大的赋值给后一个</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(arrs)</span><br><span class="line">//2.快速排序</span><br><span class="line">function quickSort(arr) &#123;</span><br><span class="line">	if(arr.length &lt;= 1) return arr;</span><br><span class="line">	var middleIndex = Math.floor(arr.length/2);//取中间值</span><br><span class="line">	var middle = arr.splice(middleIndex,1);//删除并返回这个值，即把中间这个值拿出来用作比较</span><br><span class="line">	var left = [];</span><br><span class="line">	var right = [];</span><br><span class="line">	for(var i = 0; i &lt; arr.length; i ++)&#123;</span><br><span class="line">		if(arr[i] &gt; middle)&#123;  //遍历，比这个大的放在right数组，小的放在left数组</span><br><span class="line">			right.push(arr[i])</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			left.push(arr[i])</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return quickSort(left).concat(middle,quickSort(right));//递归 直到length&lt;=1</span><br><span class="line">&#125;</span><br><span class="line">console.log(quickSort(arrs));</span><br><span class="line">//3.选择排序</span><br><span class="line">	function selectSort(arr) &#123;</span><br><span class="line">		var minIndex, temp;</span><br><span class="line">		for(var i = 0; i &lt; arr.length-1; i++)&#123;</span><br><span class="line">			 minIndex = i;</span><br><span class="line">			for(var j = i+1; j&lt;arr.length; j++)&#123;</span><br><span class="line">				if(arr[j] &lt; arr[minIndex])&#123;</span><br><span class="line">					minIndex = j</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			temp = arr[i];</span><br><span class="line">			arr[i] =arr[minIndex];</span><br><span class="line">			arr[minIndex] = temp;</span><br><span class="line">		&#125;</span><br><span class="line">		return arr;</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(selectSort(arrs))</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/hexo搭建博客遇到的一些坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1148,158 +1304,6 @@ e、浏览器兼容性：最大缺点，IE9以下浏览器几乎全军覆没。
             </a>
           </div>
           <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/数组排序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sean">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sean">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/16/数组排序/" itemprop="url">数组相关面试题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T09:34:13+08:00">
-                2018-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,400
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/*Question:统计一个字符串中出现最多的字符。------------------------------------------------------*/</span><br><span class="line">		var str = &apos;wangxiaoaiwangxiaoting&apos;;</span><br><span class="line">		var o = &#123;&#125;;</span><br><span class="line">		for(var i = 0; i &lt; str.length; i++) &#123;</span><br><span class="line">			var char = str.charAt(i);</span><br><span class="line">		// console.log(char);</span><br><span class="line">			if(o[char])&#123;     //obj.name 和 obj[&apos;name&apos;]</span><br><span class="line">				o[char]++  //如果对象有这个属性了，就给这个属性自增1</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">				o[char] = 1  //如果对象没这个属性，就个这个属性值设为1</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(o);</span><br><span class="line">		var num = 0;</span><br><span class="line">		var number = &apos;&apos;;</span><br><span class="line">		for (var i in o) &#123; //for in循环 遍历对象的属性和方法</span><br><span class="line">			if(num &lt; o[i])&#123;</span><br><span class="line">				num = o[i];</span><br><span class="line">				number = i</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(&apos;最多出现的字符是:&apos;+number+&apos;,&apos;+&apos;次数是&apos;+num)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br><span class="line">	/*数组去重的几种方法  --------------------------------------------------------------------------*/</span><br><span class="line">	var arr = [1,1,2,2,7,5,7,5,4,3,3,4,&apos;a&apos;,&apos;c&apos;,&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;b&apos;]</span><br><span class="line">	//方法一：利用对象属性的存在的特性，如果没有该属性则存入数组</span><br><span class="line">	function unique1(arr) &#123;</span><br><span class="line">		var res = [];</span><br><span class="line">		var obj = &#123;&#125;;</span><br><span class="line">		for(var i = 0; i&lt;arr.length; i++)&#123;</span><br><span class="line">			if(!obj[arr[i]])&#123;   //obj[arr[i]]为obj对象的属性值</span><br><span class="line">				obj[arr[i]] = 1;</span><br><span class="line">				res.push(arr[i])</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return res;</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(unique1(arr));</span><br><span class="line"></span><br><span class="line">	//方法二：利用数组的indexOf</span><br><span class="line">	function unqiue2(arr) &#123;</span><br><span class="line">		var res = [];</span><br><span class="line">		for(var i = 0; i&lt;arr.length; i++)&#123;</span><br><span class="line">			if(res.indexOf(arr[i])==-1)&#123;  //或 arr.indexOf(arr[i])==i,即arr[i]第一次出现就push进res，再次出现就不符合条件，不再push。</span><br><span class="line">				res.push(arr[i])</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return res;</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(unqiue2(arr));</span><br><span class="line"></span><br><span class="line">	//方法三：数组原型对象上的的includes方法</span><br><span class="line">	function unique3(arr) &#123;</span><br><span class="line">		var res = [];</span><br><span class="line">		for(var i = 0 ;i &lt; arr.length; i++)&#123;</span><br><span class="line">			if(!res.includes(arr[i]))&#123;</span><br><span class="line">				res.push(arr[i])</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return res;</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(unique3(arr));</span><br><span class="line"></span><br><span class="line">	//方法四：排序后相邻去重 思路：原数组排序，排序后相同值相邻，然后遍历时新数组只传入不与前一个值相同的值</span><br><span class="line">	function unique4(arr) &#123;</span><br><span class="line">		arr.sort();  //排序后arr已经改变了</span><br><span class="line">		var res = [arr[0]];</span><br><span class="line">		for(var i = 1; i&lt;arr.length; i++)&#123;</span><br><span class="line">			if(arr[i] !== res[res.length-1])&#123;</span><br><span class="line">				res.push(arr[i])</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return res;</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(unique4(arr));</span><br><span class="line"></span><br><span class="line">	//方法五：优化遍历数组</span><br><span class="line">	function unique5(arr) &#123;</span><br><span class="line">		var res = [];</span><br><span class="line">		for(var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">			for(var j = i+1; j &lt; arr.length; j++)&#123;</span><br><span class="line">				if(arr[i] == arr[j])&#123;</span><br><span class="line">					 ++ i;  //与右边的元素依次比较，若有重复，则跳出内层循环，重新开始。</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				res.push(arr[i])</span><br><span class="line">			&#125;</span><br><span class="line">			return res;</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(unique5(arr))</span><br><span class="line"></span><br><span class="line">	//方法六：ES6 Set数据结构类似于数组，其成员都是唯一的 IE系列不兼容</span><br><span class="line">	function unique6(arr) &#123;</span><br><span class="line">		// return Array.from(new Set(arr)) ;//Array.from 将Set结构转换成数组</span><br><span class="line">		return [...(new Set(arr))]	</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(unique6(arr))</span><br><span class="line"></span><br><span class="line">	//方法七：ES6 </span><br><span class="line">	function unique7(arr) &#123;</span><br><span class="line">		const res = new Map();</span><br><span class="line">		return arr.filter((a)=&gt;!res.has(a)&amp;&amp;res.set(a,1))</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(unique7(arr));</span><br><span class="line"></span><br><span class="line">	/*数组clone(深、浅拷贝) ----------------------------------------------------------------*/</span><br><span class="line">	var arr1 = arr.concat();//方法1 concat()，深拷贝</span><br><span class="line">	var arr2 = arr.slice(0);//方法2	slice()，深拷贝</span><br><span class="line">	var arr3 = [];			//方法3	for循环,浅拷贝</span><br><span class="line">	for(var i in arr)&#123;</span><br><span class="line">		arr3[i] = arr[i]</span><br><span class="line">	&#125;</span><br><span class="line">	/**</span><br><span class="line">	 * 深拷贝 ,如果数组里含有对象</span><br><span class="line">	 */</span><br><span class="line">	function deepClone(arr) &#123;</span><br><span class="line">		var res = [];</span><br><span class="line">		for (var i in arr)&#123;</span><br><span class="line">			if (typeof arr[i] === &apos;object&apos;) &#123; //如果含有对象，则递归</span><br><span class="line">				res[i] = deepClone(arr[i])</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				res[i] = arr[i]</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return res</span><br><span class="line">	&#125;</span><br><span class="line">	/*找出数组中的最大值  -------------------------------------------------------------*/</span><br><span class="line">	var arrMax = [1,2,3,4,5];</span><br><span class="line">	//1.for循环,古老的写法，遍历之后取最大值</span><br><span class="line">	var arrRes = arrMax[0];</span><br><span class="line">	for(var i = 1 ;i &lt;arrMax.length; i++)&#123;</span><br><span class="line">		var result = Math.max(arrRes,arrMax[i]) </span><br><span class="line">	&#125;</span><br><span class="line">	console.log(result)</span><br><span class="line">	//2.Math最大值。用到apply方法，可以将数组转换成参数列表再调用Math方法</span><br><span class="line">	Math.max.apply(null,arrMax)</span><br><span class="line">	//3.sort()</span><br><span class="line">	arrMax.sort((num1,num2) =&gt; &#123;return num2-num1&#125;)[0] //或者sort()后reverse() </span><br><span class="line">	//4.reduce()</span><br><span class="line">	arrMax.reduce((num1,num2) =&gt; &#123;return num1 &gt; num2 ? num1 : num2&#125;)</span><br><span class="line"></span><br><span class="line">	/*数组降维  -------------------------------------------------------------------*/</span><br><span class="line">	var arrDown = [[1,2,3],[4,5],[9,8,7]];</span><br><span class="line">	//1.二维数组，双层遍历</span><br><span class="line">	function down(arr) &#123;</span><br><span class="line">		var resDown = [];</span><br><span class="line">		for(var i = 0;i &lt; arr.length; i++)&#123;</span><br><span class="line">			for (var j = 0; j &lt; arr[i].length; j++)&#123;</span><br><span class="line">				resDown.push(arr[i][j])</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return resDown</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(down(arrDown))</span><br><span class="line">	//2.concat()</span><br><span class="line">	function down2(arr) &#123;</span><br><span class="line">		var resDown = [];</span><br><span class="line">		for(var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">			resDown = resDown.concat(arr[i])</span><br><span class="line">		&#125;</span><br><span class="line">		return resDown</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(down2(arrDown))</span><br><span class="line">	//3.concat()和apply()结合</span><br><span class="line">	function down3(arr) &#123;</span><br><span class="line">		var resDown = [];</span><br><span class="line">		return Array.prototype.concat.apply(resDown,arr)</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(down3(arrDown))</span><br><span class="line"></span><br><span class="line">	/*数组排序  ---------------------------------------------------------------*/</span><br><span class="line">	//1.冒泡排序</span><br><span class="line">	var arrs = [3,2,5,9,1,6,33,4,65,22];</span><br><span class="line">	var temp = 0;</span><br><span class="line">	for(var i = 0; i &lt; arrs.length; i++)&#123;</span><br><span class="line">		for(var j = i+1; j &lt; arrs.length;j++)&#123; </span><br><span class="line">		     if(arrs[i] &gt; arrs[j])&#123; //相邻比较，如果前一个大，就调换位置</span><br><span class="line">				temp = arrs[i];//temp储存前一个大的数</span><br><span class="line">				arrs[i] = arrs[j];//前一个换成小的那个数</span><br><span class="line">				arrs[j] = temp//将大的赋值给后一个</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	console.log(arrs)</span><br><span class="line">	//2.快速排序</span><br><span class="line">	function quickSort(arr) &#123;</span><br><span class="line">		if(arr.length &lt;= 1) return arr;</span><br><span class="line">		var middleIndex = Math.floor(arr.length/2);//取中间值</span><br><span class="line">		var middle = arr.splice(middleIndex,1);//删除并返回这个值，即把中间这个值拿出来用作比较</span><br><span class="line">		var left = [];</span><br><span class="line">		var right = [];</span><br><span class="line">		for(var i = 0; i &lt; arr.length; i ++)&#123;</span><br><span class="line">			if(arr[i] &gt; middle)&#123;  //遍历，比这个大的放在right数组，小的放在left数组</span><br><span class="line">				right.push(arr[i])</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				left.push(arr[i])</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return quickSort(left).concat(middle,quickSort(right));//递归 直到length&lt;=1</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(quickSort(arrs));</span><br><span class="line">	//3.选择排序</span><br><span class="line">		function selectSort(arr) &#123;</span><br><span class="line">			var minIndex, temp;</span><br><span class="line">			for(var i = 0; i &lt; arr.length-1; i++)&#123;</span><br><span class="line">				 minIndex = i;</span><br><span class="line">				for(var j = i+1; j&lt;arr.length; j++)&#123;</span><br><span class="line">					if(arr[j] &lt; arr[minIndex])&#123;</span><br><span class="line">						minIndex = j</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				temp = arr[i];</span><br><span class="line">				arr[i] =arr[minIndex];</span><br><span class="line">				arr[minIndex] = temp;</span><br><span class="line">			&#125;</span><br><span class="line">			return arr;</span><br><span class="line">		&#125;</span><br><span class="line">		console.log(selectSort(arrs))</span><br></pre></td></tr></table></figure>
-
-          
         
       
     </div>
