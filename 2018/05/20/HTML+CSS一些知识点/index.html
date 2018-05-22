@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="Sean">
 <meta property="og:description" content="html5优点和缺点    优点：    a、网络标准统一、HTML5本身是由W3C推荐出来的。 b、多设备、跨平台  c、即时更新。 d、提高可用性和改进用户的友好体验； e、有几个新的标签，这将有助于开发人员定义重要的内容；  f、可以给站点带来更多的多媒体元素(视频和音频)；   g、可以很好的替代Flash和Silverlight； h、涉及到网站的抓取和索引的时候，对于SEO很友好；">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-20T01:27:12.571Z">
+<meta property="og:updated_time" content="2018-05-22T02:40:50.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="html,css一些知识点（随时补充）">
 <meta name="twitter:description" content="html5优点和缺点    优点：    a、网络标准统一、HTML5本身是由W3C推荐出来的。 b、多设备、跨平台  c、即时更新。 d、提高可用性和改进用户的友好体验； e、有几个新的标签，这将有助于开发人员定义重要的内容；  f、可以给站点带来更多的多媒体元素(视频和音频)；   g、可以很好的替代Flash和Silverlight； h、涉及到网站的抓取和索引的时候，对于SEO很友好；">
@@ -479,16 +479,14 @@ d、性能：某些平台上的引擎问题导致HTML5性能低下。
 e、浏览器兼容性：最大缺点，IE9以下浏览器几乎全军覆没。
 </code></pre></blockquote>
 </li>
-<li><p>Doctype作用？严格模式和混杂模式如何区分？有何意义？</p>
-<blockquote>
+<li>Doctype作用？严格模式和混杂模式如何区分？有何意义？<blockquote>
 <p> 回答1： （1）、 声明位于文档中的最前面，处于标签之前。告知浏览器的解析器，用什么文档类型 规范来解析这个文档。 </p>
 <pre><code>（2）、严格模式的排版和JS 运作模式是以该浏览器支持的最高标准运行。 
 （3）、在混杂模式中，页面以宽松的向后兼容的方式显示。模拟老式浏览器的行为以防止站点无法工作。               （4）、DOCTYPE不存在或格式不正确会导致文档以混杂模式呈现。 
 </code></pre><p>回答2： doctype声明指出阅读程序应该用什么规则集来解释文档中的标记。在Web文档的情况下，“阅读程序”通常是浏览器或者校验器这样的一个程序，“规则”则是W3C所发布的一个文档类型定义（DTD）中包含的规则。<br>(1) 声明位于文档中的最前面的位置，处于标签之前。此标签可告知浏览器文档使用哪种 HTML 或 XHTML 规范。该标签可声明三种 DTD 类型，分别表示严格版本、过渡版本以及基于框架的HTML 文档。<br>(2)所谓的标准模式是指，浏览器按 W3C 标准解析执行代码；怪异模式则是使用浏览器自己的方式解析执行代码，因为不同浏览器解析执行的方式不一样，所以我们称之为怪异模式。 严格模式是浏览器根据web标准去解析页面，是一种要求严格的DTD，不允许使用任何表现层的语法，如<br>。严格模式的排版和JS 运作模式是以该浏览器支持的最高标准运行混杂模式则是一种向后兼容的解析方法，说的透明点就是可以实现IE5.5以下版本浏览器的渲染模式。<br>(3)浏览器解析时到底使用标准模式还是怪异模式，与你网页中的 DTD 声明直接相关， DTD 声明定义了标准文档的类型（标准模式解析）文档类型，会使浏览器使用相应的方式加载网页并显示，忽略 DTD 声明 ,将使网页进入怪异模式。</p>
-</blockquote>
+<a id="more"></a></blockquote>
 </li>
-<li><p>link和@import区别？</p>
-</li>
+<li>link和@import区别？</li>
 </ol>
 <blockquote>
 <p>两者都是外部引用CSS的方式，但是存在一定的区别：<br>区别1： link 是 XHTML 标签，除了加载 CSS 外，还可以定义 RSS 等其他事务； @import 属于 CSS 范畴，只能加载 CSS 。<br>区别2： link 引用 CSS 时，在页面载入时同时加载； @import 需要页面网页完全载入以后加载。<br>区别3： link 是 XHTML 标签，无兼容问题； @import 是在 CSS2.1 提出的，低版本的浏览器不支持。<br>区别4： link 支持使用 Javascript 控制 DOM 去改变样式；而 @import 不支持。</p>
