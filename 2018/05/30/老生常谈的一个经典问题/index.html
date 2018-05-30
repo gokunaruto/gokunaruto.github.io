@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="Sean">
 <meta property="og:description" content="老生常谈的一个面试题，如何解决点击ul下的每个li，弹出这个li的元素索引呢？12345&amp;lt;ul&amp;gt;		&amp;lt;li&amp;gt;111&amp;lt;/li&amp;gt;		&amp;lt;li&amp;gt;222&amp;lt;/li&amp;gt;		&amp;lt;li&amp;gt;333&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt; 1. 绑定数据在DOM元素上1234567var oLi = document.getElementsByTag">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-30T05:17:06.731Z">
+<meta property="og:updated_time" content="2018-05-30T05:54:20.089Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="老生常谈的一个经典问题">
 <meta name="twitter:description" content="老生常谈的一个面试题，如何解决点击ul下的每个li，弹出这个li的元素索引呢？12345&amp;lt;ul&amp;gt;		&amp;lt;li&amp;gt;111&amp;lt;/li&amp;gt;		&amp;lt;li&amp;gt;222&amp;lt;/li&amp;gt;		&amp;lt;li&amp;gt;333&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt; 1. 绑定数据在DOM元素上1234567var oLi = document.getElementsByTag">
@@ -446,7 +446,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  250
+                  365
                 </span>
               
 
@@ -462,7 +462,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -487,7 +487,9 @@
 <p><strong>1. 绑定数据在DOM元素上</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">		for (var i = 0; i &lt; oLi.length; i++) &#123;</span><br><span class="line">			oLi[i]._index = i;</span><br><span class="line">			oLi[i].onclick = function () &#123;</span><br><span class="line">				alert(this._index + 1)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
 <p>遍历oLi，设置一个属性_index来记录i。<br><strong>2. 闭包</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">		for (var i = 0; i &lt; oLi.length; i++) &#123;</span><br><span class="line">			oLi[i].onclick = fn(i)</span><br><span class="line">		&#125;</span><br><span class="line">		function fn(j) &#123;</span><br><span class="line">			return function() &#123;</span><br><span class="line">				alert(j + 1)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
 <p>IIFE写法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">		for (var i = 0; i &lt; oLi.length; i++) &#123;</span><br><span class="line">			oLi[i].onclick = (function(j)&#123;</span><br><span class="line">				return function() &#123;</span><br><span class="line">					alert(j + 1)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)(i)</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样的写法是最常见的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">		for (var i = 0; i &lt; oLi.length; i++) &#123;</span><br><span class="line">			(function (j) &#123;</span><br><span class="line">				oLi[j].onclick = function () &#123;</span><br><span class="line">					alert(j + 1)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)(i)</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>3. let</strong><br>超级简单，ES6使用let就是为了解决作用域的问题。ES5的一些方法要逐渐淘汰了~<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">		for (let i = 0; i &lt; oLi.length; i++) &#123;</span><br><span class="line">			oLi[i].onclick = function() &#123;</span><br><span class="line">				alert( i + 1)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>4. 事件委托</strong><br>先将带有length属性的元素转换为数组，然后利用数组的indexOf方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">			ali = Array.prototype.slice.call(oLi);</span><br><span class="line">			oUl = document.getElementsByTagName(&apos;ul&apos;)[0];</span><br><span class="line">		oUl.addEventListener(&apos;click&apos;, function () &#123;</span><br><span class="line">			var event = event || window.event;</span><br><span class="line">			var target = event.target || event.srcElement;</span><br><span class="line">			alert(ali.indexOf(target) + 1)</span><br><span class="line">		&#125;)</span><br></pre></td></tr></table></figure></p>
 <p>本人水平有限，如有错误，还望指出 ^_^”</p>
 
       
@@ -557,6 +559,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/31/用原生JS写大图轮播~/" rel="prev" title="原生js写大图轮播">
+                原生js写大图轮播 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -633,7 +639,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -644,7 +650,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -655,7 +661,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -919,7 +925,7 @@
 <span class="post-meta-divider">|</span>
 <div class="theme-info">
  <i class="fa fa-pencil"></i>
- <span class="post-count">博客全站共20.9k字</span>
+ <span class="post-count">博客全站共21.8k字</span>
 </div>
 <span class="post-meta-divider">|</span>
 

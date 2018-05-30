@@ -362,6 +362,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/31/用原生JS写大图轮播~/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sean">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/31/用原生JS写大图轮播~/" itemprop="url">原生js写大图轮播</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T07:57:27+08:00">
+                2018-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  750
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>轮播图想必大家都不陌生了，各种插件也用的飞起。但是真正的原理是如何实现的呢？<br>今天没事用原生js写了一个轮播图的效果，借用了小米官网的一些大图。废话不多说，直接上代码。<br><strong>CSS</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">	margin: 0;</span><br><span class="line">	padding: 0</span><br><span class="line">&#125;</span><br><span class="line">#wrap &#123;</span><br><span class="line">	width: 1226px;</span><br><span class="line">	height: 460px;</span><br><span class="line">	position: relative;</span><br><span class="line">	margin: 50px auto;</span><br><span class="line">&#125;</span><br><span class="line">.banner &#123;</span><br><span class="line">	position: absolute;</span><br><span class="line">	opacity: 0</span><br><span class="line">&#125;</span><br><span class="line">.tab &#123;</span><br><span class="line">	position: absolute;</span><br><span class="line">	bottom: 0;</span><br><span class="line">	left: 50%;</span><br><span class="line">	transform: translateX(-50%);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">.tab span &#123;</span><br><span class="line">	display: inline-block;</span><br><span class="line">	width: 10px;</span><br><span class="line">	height: 10px;</span><br><span class="line">	border-radius: 50%;</span><br><span class="line">	margin:3px;</span><br><span class="line">	background-color: #fff</span><br><span class="line">&#125;</span><br><span class="line">.tab span:hover &#123;</span><br><span class="line">	background-color: #000;</span><br><span class="line">	cursor: pointer;</span><br><span class="line">&#125;</span><br><span class="line">.tab span.on &#123;</span><br><span class="line">	background-color: #000</span><br><span class="line">&#125;</span><br><span class="line">.prev &#123;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top: 215px;</span><br><span class="line">	left: 20px;</span><br><span class="line">	background: url(img/arrow.png) -37px -36px;</span><br><span class="line">	width: 30px;</span><br><span class="line">	height: 30px;</span><br><span class="line">&#125;</span><br><span class="line">.prev:hover &#123;</span><br><span class="line">	background:url(img/arrow.png) 0px -36px;</span><br><span class="line">	cursor: pointer;</span><br><span class="line">&#125;</span><br><span class="line">.next &#123;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top: 215px;</span><br><span class="line">	right: 20px;</span><br><span class="line">	background: url(img/arrow.png) -37px 0px;</span><br><span class="line">	width: 30px;</span><br><span class="line">	height: 30px;</span><br><span class="line">&#125;</span><br><span class="line">.next:hover &#123;</span><br><span class="line">	background: url(img/arrow.png) 0px 0px;</span><br><span class="line">	cursor: pointer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/31/用原生JS写大图轮播~/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/老生常谈的一个经典问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -447,7 +624,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  250
+                  365
                 </span>
               
 
@@ -463,7 +640,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -490,7 +667,9 @@
 <p><strong>1. 绑定数据在DOM元素上</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">		for (var i = 0; i &lt; oLi.length; i++) &#123;</span><br><span class="line">			oLi[i]._index = i;</span><br><span class="line">			oLi[i].onclick = function () &#123;</span><br><span class="line">				alert(this._index + 1)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
 <p>遍历oLi，设置一个属性_index来记录i。<br><strong>2. 闭包</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">		for (var i = 0; i &lt; oLi.length; i++) &#123;</span><br><span class="line">			oLi[i].onclick = fn(i)</span><br><span class="line">		&#125;</span><br><span class="line">		function fn(j) &#123;</span><br><span class="line">			return function() &#123;</span><br><span class="line">				alert(j + 1)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
 <p>IIFE写法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">		for (var i = 0; i &lt; oLi.length; i++) &#123;</span><br><span class="line">			oLi[i].onclick = (function(j)&#123;</span><br><span class="line">				return function() &#123;</span><br><span class="line">					alert(j + 1)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)(i)</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样的写法是最常见的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">		for (var i = 0; i &lt; oLi.length; i++) &#123;</span><br><span class="line">			(function (j) &#123;</span><br><span class="line">				oLi[j].onclick = function () &#123;</span><br><span class="line">					alert(j + 1)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)(i)</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>3. let</strong><br>超级简单，ES6使用let就是为了解决作用域的问题。ES5的一些方法要逐渐淘汰了~<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">		for (let i = 0; i &lt; oLi.length; i++) &#123;</span><br><span class="line">			oLi[i].onclick = function() &#123;</span><br><span class="line">				alert( i + 1)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>4. 事件委托</strong><br>先将带有length属性的元素转换为数组，然后利用数组的indexOf方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var oLi = document.getElementsByTagName(&apos;li&apos;);</span><br><span class="line">			ali = Array.prototype.slice.call(oLi);</span><br><span class="line">			oUl = document.getElementsByTagName(&apos;ul&apos;)[0];</span><br><span class="line">		oUl.addEventListener(&apos;click&apos;, function () &#123;</span><br><span class="line">			var event = event || window.event;</span><br><span class="line">			var target = event.target || event.srcElement;</span><br><span class="line">			alert(ali.indexOf(target) + 1)</span><br><span class="line">		&#125;)</span><br></pre></td></tr></table></figure></p>
 <p>本人水平有限，如有错误，还望指出 ^_^”</p>
 
           
@@ -1972,183 +2151,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/14/关于区块链/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sean">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sean">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/14/关于区块链/" itemprop="url">关于区块链</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-14T12:46:07+08:00">
-                2018-01-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/科技/" itemprop="url" rel="index">
-                    <span itemprop="name">科技</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  5,212
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  18
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本文转载自知乎@maxdeath<br>首先要搞清一个问题——比特币是区块链，但是区块链并不是比特币。<br>于是，在区块链的这个问题回答里，提到“矿工”，“挖矿”，“最长链”，“分叉”等等词的，其实都不准确。<br>写一点上个月讲课的内容——个人觉得大部分的回答，包括google搜出来的或者wiki的，都不能很好地解释区块链是个什么东西。因为讲比特币的人很多，懂比特币的人也很多，但是具体到区块链，现在并没有一个很清楚的定义说什么是区块链，基本上所有的介绍里都是这样的：<br>比特币——〉区块链是比特币的底层技术。<br>或者<br>比特币——〉比特币是一种区块链。<br>具体到什么是区块链的问题，目前没有看到很好的定义和介绍，更多的是大而化之地讲区块链的意义在哪里的空泛文章，要不然就是一水的矿工和挖矿。所以我来从纯理论角度说一下我个人对区块链的定义：<br>1，区块链是一个放在非安全环境中的分布式数据库（系统）。<br>2，区块链采用密码学的方法来保证已有数据不可能被篡改。<br>3，区块链采用共识算法来对于新增数据达成共识。<br>具有以上三个性质的系统，就是区块链。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/14/关于区块链/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2203,7 +2205,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2214,7 +2216,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2225,7 +2227,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2489,7 +2491,7 @@
 <span class="post-meta-divider">|</span>
 <div class="theme-info">
  <i class="fa fa-pencil"></i>
- <span class="post-count">博客全站共20.9k字</span>
+ <span class="post-count">博客全站共21.8k字</span>
 </div>
 <span class="post-meta-divider">|</span>
 
