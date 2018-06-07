@@ -362,6 +362,770 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/mpvue开发小程序笔记——4.koa入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sean">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/07/mpvue开发小程序笔记——4.koa入门/" itemprop="url">mpvue开发小程序笔记——4.koa入门</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T13:56:42+08:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mpvue/" itemprop="url" rel="index">
+                    <span itemprop="name">mpvue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  675
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>koa是什么？</strong><br>koa基于Nodejs平台的下一代web开发框架（上一代是express）。</p>
+<ol>
+<li>Express原班人马打造，更精简。</li>
+<li>Async+await处理异步</li>
+<li>洋葱圈型的中间件机制。<br>用法很简单：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir koa-demo</span><br><span class="line">npm init</span><br><span class="line">npm install koa --save</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>文件夹中新建一个server.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const Koa = require(&apos;koa&apos;)</span><br><span class="line">const app = new Koa()</span><br><span class="line"></span><br><span class="line">app.use(async(ctx, next) =&gt; &#123;ctx.body = &apos;hello&apos;&#125;)</span><br><span class="line">app.listen(3000)//端口3000</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node server.js</span><br></pre></td></tr></table></figure>
+<p>就可以访问localhost:3000了。<br>ctx是什么呢？封装了request和response的上下文。<br>next是什么呢？下一个中间件。<br>app是什么呢？启动应用<br><strong>中间件机制：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const Koa = require(&apos;koa&apos;)</span><br><span class="line">const app = new Koa()</span><br><span class="line"></span><br><span class="line">app.use(async(ctx, next) =&gt; &#123;</span><br><span class="line">	ctx.body = &apos;1&apos;</span><br><span class="line">	next()</span><br><span class="line">	ctx.body += &apos;2&apos;</span><br><span class="line">&#125;)</span><br><span class="line">app.use(async(ctx, next) =&gt; &#123;</span><br><span class="line">	ctx.body += &apos;3&apos;</span><br><span class="line">	next()</span><br><span class="line">	ctx.body += &apos;4&apos;</span><br><span class="line">&#125;)</span><br><span class="line">app.use(async(ctx, next) =&gt; &#123;</span><br><span class="line">	ctx.body += &apos;5&apos;</span><br><span class="line">	next()</span><br><span class="line">	ctx.body += &apos;6&apos;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(3000)</span><br></pre></td></tr></table></figure></p>
+<p>结果是：135642<br>下面这个图可以解释这个机制。</p>
+<p><img src="https://camo.githubusercontent.com/d80cf3b511ef4898bcde9a464de491fa15a50d06/68747470733a2f2f7261772e6769746875622e636f6d2f66656e676d6b322f6b6f612d67756964652f6d61737465722f6f6e696f6e2e706e67" alt="洋葱圈"></p>
+<p>写一个小插件<br>新建一个koa-logger.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module.exports = async(cxt, next) =&gt; &#123;</span><br><span class="line">	const start = new Date().getTime();</span><br><span class="line">	await next();</span><br><span class="line">	const end = new Date().getTime();</span><br><span class="line">	console.log(cxt.request.url, end-start, cxt.body.length)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在server.js里引用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const koalog = require(&apos;./koa-logger.js&apos;)</span><br><span class="line">app.use(koalog)</span><br></pre></td></tr></table></figure></p>
+<p>就可以在命令行中显示出地址，耗时。<br><strong>async和await优雅的处理异步</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function ajax() &#123;</span><br><span class="line">			setTimeout(() =&gt; &#123;</span><br><span class="line">				console.log(&apos;你好&apos;)</span><br><span class="line">			&#125;,1000)</span><br><span class="line">		&#125;</span><br><span class="line">ajax()</span><br><span class="line">console.log(&apos;sean&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>我们都知道输出sean 1秒之后再输出你好。<br>异步编程的几个方法：<br>1.callback回调函数，很古老的东西了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function ajax(fn) &#123;</span><br><span class="line">	setTimeout(() =&gt; &#123;</span><br><span class="line">		console.log(&apos;你好&apos;)</span><br><span class="line">		fn()//回调函数</span><br><span class="line">	&#125;, 1000)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">var fn = function () &#123;</span><br><span class="line">	console.log(&apos;sean&apos;)</span><br><span class="line">&#125;</span><br><span class="line">ajax(fn)</span><br></pre></td></tr></table></figure></p>
+<p>回调函数的优点是简单、容易理解和部署，缺点是不利于代码的阅读和维护，各个部分之间高度耦合（Coupling），流程会很混乱，而且每个任务只能指定一个回调函数。如果回调函数中再嵌套回调函数的话，就行成了回调地狱（callback hell）<br>2.promise<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function delay(word) &#123;</span><br><span class="line">	return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">		setTimeout(() =&gt; &#123;</span><br><span class="line">			resolve(word)</span><br><span class="line">		&#125;, 1000)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line">delay(&apos;鸣人&apos;).then((word) =&gt; &#123;</span><br><span class="line">	console.log(word)</span><br><span class="line">	return delay(&apos;佐助&apos;)</span><br><span class="line">&#125;).then((word) =&gt; &#123;</span><br><span class="line">	console.log(word)</span><br><span class="line">	return delay(&apos;小樱&apos;)</span><br><span class="line">&#125;).then((word) =&gt; &#123;</span><br><span class="line">	console.log(word)</span><br><span class="line">&#125;)</span><br><span class="line">//鸣人，佐助，小樱</span><br></pre></td></tr></table></figure></p>
+<p>promise链式调用：会将前一个then的返回值（return）作为下一次成功的回调函数的参数。<br>3.async+await (必须一起使用)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function delay(word) &#123;</span><br><span class="line">			return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">				setTimeout(() =&gt; &#123;</span><br><span class="line">					resolve(word)</span><br><span class="line">				&#125;, 1000)</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">async function start() &#123;</span><br><span class="line">	const word1 = await delay(&apos;鸣人&apos;)</span><br><span class="line">	console.log(word1)</span><br><span class="line">	const word2 = await delay(&apos;佐助&apos;)</span><br><span class="line">	console.log(word2)</span><br><span class="line">	const word3 = await delay(&apos;小樱&apos;)</span><br><span class="line">	console.log(word3)</span><br><span class="line">&#125;</span><br><span class="line">start()</span><br></pre></td></tr></table></figure></p>
+<p>简单明了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/mpvue开发小程序笔记——3.ES6一些代码片段/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sean">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/07/mpvue开发小程序笔记——3.ES6一些代码片段/" itemprop="url">mpvue开发小程序笔记——3.ES6一些代码片段</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T09:27:01+08:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mpvue/" itemprop="url" rel="index">
+                    <span itemprop="name">mpvue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  315
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.遍历<br>forEach和箭头函数使遍历更优雅.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1, 2, 3, 4]</span><br><span class="line">arr.forEach(v =&gt; console.log(v))</span><br></pre></td></tr></table></figure></p>
+<p>map()函数返回一个新数组，数组中的元素是原始数组元素调用函数处理后的值。every()方法用于检测数组所有元素是否都符合指定条件（通过函数提供）。filter()方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.log(arr.map(v =&gt; v*2))//[2, 4, 6, 8]</span><br><span class="line">console.log(arr.every(v =&gt; v&gt;0))//true</span><br><span class="line">console.log(arr.filter(v =&gt; v&lt;=3))//[1, 2, 3]</span><br></pre></td></tr></table></figure></p>
+<p>可以链式调用。</p>
+<p>2.去重<br>ES6提供了新的数据结构Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。<br>Set本身是一个构造函数，用来生成Set数据结构。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log([...new Set(arr)])</span><br><span class="line">console.log([...new Set([...arr1, ...arr2])])//合并后去重</span><br></pre></td></tr></table></figure></p>
+<p><strong>一个面试题</strong>：淘宝首页一共用到了多少种标签。<br>首先获取所有元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.querySelectorAll(&apos;*&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>map方法返回其所有节点名称<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[...document.querySelectorAll(&apos;*&apos;)].map(v =&gt; v.nodeName)</span><br></pre></td></tr></table></figure></p>
+<p>ES6的Set方法去重。size方法返回长度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Set([...document.querySelectorAll(&apos;*&apos;)].map(v =&gt; v.nodeName)).size</span><br></pre></td></tr></table></figure></p>
+<p>一行代码搞定。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/mpvue开发小程序笔记——1.github和git的简单使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sean">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/07/mpvue开发小程序笔记——1.github和git的简单使用/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T09:26:22+08:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  331
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="在此处输入标题"><a href="#在此处输入标题" class="headerlink" title="在此处输入标题"></a>在此处输入标题</h1><p>标签（空格分隔）： 未分类</p>
+<hr>
+<p>1.遍历<br>forEach和箭头函数使遍历更优雅.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1, 2, 3, 4]</span><br><span class="line">arr.forEach(v =&gt; console.log(v))</span><br></pre></td></tr></table></figure></p>
+<p>map()函数返回一个新数组，数组中的元素是原始数组元素调用函数处理后的值。every()方法用于检测数组所有元素是否都符合指定条件（通过函数提供）。filter()方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.log(arr.map(v =&gt; v*2))//[2, 4, 6, 8]</span><br><span class="line">console.log(arr.every(v =&gt; v&gt;0))//true</span><br><span class="line">console.log(arr.filter(v =&gt; v&lt;=3))//[1, 2, 3]</span><br></pre></td></tr></table></figure></p>
+<p>可以链式调用。</p>
+<p>2.去重<br>ES6提供了新的数据结构Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。<br>Set本身是一个构造函数，用来生成Set数据结构。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log([...new Set(arr)])</span><br><span class="line">console.log([...new Set([...arr1, ...arr2])])//合并后去重</span><br></pre></td></tr></table></figure></p>
+<p><strong>一个面试题</strong>：淘宝首页一共用到了多少种标签。<br>首先获取所有元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.querySelectorAll(&apos;*&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>map方法返回其所有节点名称<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[...document.querySelectorAll(&apos;*&apos;)].map(v =&gt; v.nodeName)</span><br></pre></td></tr></table></figure></p>
+<p>ES6的Set方法去重。size方法返回长度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Set([...document.querySelectorAll(&apos;*&apos;)].map(v =&gt; v.nodeName)).size</span><br></pre></td></tr></table></figure></p>
+<p>一行代码搞定。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/mpvue开发小程序笔记——2.微信小程序，mpvue和wepy的比较一览/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sean">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/07/mpvue开发小程序笔记——2.微信小程序，mpvue和wepy的比较一览/" itemprop="url">mpvue开发小程序笔记——2.微信小程序，mpvue和wepy比较一览</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T08:34:07+08:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mpvue/" itemprop="url" rel="index">
+                    <span itemprop="name">mpvue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  179
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <table>
+<thead>
+<tr>
+<th>/</th>
+<th style="text-align:center">微信小程序</th>
+<th style="text-align:center">mpvue</th>
+<th style="text-align:center">wepy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语法规范</td>
+<td style="text-align:center">小程序开发规范</td>
+<td style="text-align:center">VueJS开发规范</td>
+<td style="text-align:center">类Vue开发规范</td>
+</tr>
+<tr>
+<td>标签集合</td>
+<td style="text-align:center">小程序标签</td>
+<td style="text-align:center">html标签+小程序标签</td>
+<td style="text-align:center">小程序标签</td>
+</tr>
+<tr>
+<td>样式规范</td>
+<td style="text-align:center">wxss</td>
+<td style="text-align:center">sass,less,postcss</td>
+<td style="text-align:center">sass,less,styus</td>
+</tr>
+<tr>
+<td>组件化</td>
+<td style="text-align:center">无组件化机制</td>
+<td style="text-align:center">VueJs组件规范</td>
+<td style="text-align:center">自定义组件规范</td>
+</tr>
+<tr>
+<td>多端复用</td>
+<td style="text-align:center">不可复用</td>
+<td style="text-align:center">支持转化为H5</td>
+<td style="text-align:center">支持转化为H5</td>
+</tr>
+<tr>
+<td>自动构建</td>
+<td style="text-align:center">本身无自动构建</td>
+<td style="text-align:center">webpack</td>
+<td style="text-align:center">框架内置自动构建</td>
+</tr>
+<tr>
+<td>上手成本</td>
+<td style="text-align:center">全新学习</td>
+<td style="text-align:center">熟悉VueJs即可</td>
+<td style="text-align:center">VueJs和wepy</td>
+</tr>
+<tr>
+<td>集中数据管理</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">使用Vuex实现</td>
+<td style="text-align:center">不支持</td>
+</tr>
+</tbody>
+</table>
+<p>由此可见。微信小程序学习成本还是比较高的，目前来说，mpvue是最适合学习来开发小程序的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/弹跳效果的手风琴下拉菜单/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1420,731 +2184,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/ES6总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sean">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sean">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/22/ES6总结/" itemprop="url">ES6相关总结（随时补充）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T10:17:39+08:00">
-                2018-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript-ES6/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript ES6</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2,576
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  11
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>网上杂七杂八的ES6语法看的眼花缭乱，今天没事自己总结下一些常用的，加深下印象。<br>ES6是什么东东呢，其实就是JavaScript的下一代标准。全称ECMAScrpt 6.0。大家常说的ES2015其实就是ES6的第一个版本。其实不必纠结这些。它们俩没啥区别，都指下一代JS标准。<br>下面列举下常见的新功能。</p>
-<h3 id="1-let和const"><a href="#1-let和const" class="headerlink" title="1. let和const"></a><strong>1. let和const</strong></h3><p>这个算是高频使用的了，ES6里代替var，let定义变量，const定义常量。</p>
-<ul>
-<li><p><strong>let</strong></p>
-<p>跟ES5相比，有两点不同.<br>一是不存在变量提升：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(a)   // undefined</span><br><span class="line">console.log(b)   // 报错：b未定义</span><br><span class="line">var a = 1</span><br><span class="line">let b = 1</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>因为let不存在变量提升，所以会有所谓的暂时性死区（这个区块中变量未声明之前，对该变量的一切调用都会报错）。其实ES6这样设计的目的就是为了让我们养成规范的代码习惯，先声明再调用。这一点一定要注意。</p>
-<p>二是let声明的变量不能重复声明，否则会报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var i = 1;</span><br><span class="line">var i = 2;</span><br><span class="line">console.log(i)//2</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let i = 1;</span><br><span class="line">let i = 2;</span><br><span class="line">console.log(i)//报错</span><br></pre></td></tr></table></figure>
-<p>当然在不同的区块内重复声明就可以，比如for循环其实就是2个区块，（）的可以理解为父作用域，{}里的为子作用域。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(let i = 0; i &lt; 5; i++)&#123;</span><br><span class="line">  let i = 7；</span><br><span class="line">  console.log(i)</span><br><span class="line">&#125;</span><br><span class="line">// 输出结果是5个7</span><br></pre></td></tr></table></figure></p>
-<p>这里没有报错，说明（）和{}其实是2个作用域。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/22/ES6总结/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/HTML+CSS一些知识点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sean">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sean">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/20/HTML+CSS一些知识点/" itemprop="url">html,css一些知识点（随时补充）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T09:22:33+08:00">
-                2018-05-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HTML/" itemprop="url" rel="index">
-                    <span itemprop="name">HTML</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2,218
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="1-html5优点和缺点"><a href="#1-html5优点和缺点" class="headerlink" title="1. html5优点和缺点"></a>1. html5优点和缺点</h3><blockquote>
-<p>   优点：    a、网络标准统一、HTML5本身是由W3C推荐出来的。<br>          b、多设备、跨平台<br>          c、即时更新。<br>          d、提### 高可用性和改进用户的友好体验；<br>          e、有几个新的标签，这将有助于开发人员定义重要的内容；<br>          f、可以给站点带来更多的多媒体元素(视频和音频)；<br>          g、可以很好的替代Flash和Silverlight；<br>          h、涉及到网站的抓取和索引的时候，对于SEO很友好；<br>          i、被大量应用于移动应用程序和游戏。<br>缺点： a、安全：像之前Firefox4的web socket和透明代理的实现存在严重的安全问题，同时web storage、web socket 这样的功能很容易被黑客利用，来盗取用户的信息和资料。<br>          b、完善性：许多特性各浏览器的支持程度也不一样。<br>          c、技术门槛：HTML5简化开发者工作的同时代表了有许多新的属性和API需要开发者学习，像web worker、web socket、web storage 等新特性，后台甚至浏览器原理的知识，机遇的同时也是巨大的挑战<br>          d、性能：某些平台上的引擎问题导致HTML5性能低下。<br>          e、浏览器兼容性：最大缺点，IE9以下浏览器几乎全军覆没。</p>
-<h3 id="2-Doctype作用？严格模式和混杂模式如何区分？有何意义？"><a href="#2-Doctype作用？严格模式和混杂模式如何区分？有何意义？" class="headerlink" title="2. Doctype作用？严格模式和混杂模式如何区分？有何意义？"></a>2. Doctype作用？严格模式和混杂模式如何区分？有何意义？</h3><p> 回答1： （1）、 声明位于文档中的最前面，处于标签之前。告知浏览器的解析器，用什么文档类型 规范来解析这个文档。<br>            （2）、严格模式的排版和JS 运作模式是以该浏览器支持的最高标准运行。<br>            （3）、在混杂模式中，页面以宽松的向后兼容的方式显示。模拟老式浏览器的行为以防止站点无法工作。               （4）、DOCTYPE不存在或格式不正确会导致文档以混杂模式呈现。<br>回答2： doctype声明指出阅读程序应该用什么规则集来解释文档中的标记。在Web文档的情况下，“阅读程序”通常是浏览器或者校验器这样的一个程序，“规则”则是W3C所发布的一个文档类型定义（DTD）中包含的规则。<br> (1) 声明位于文档中的最前面的位置，处于标签之前。此标签可告知浏览器文档使用哪种 HTML 或 XHTML 规范。该标签可声明三种 DTD 类型，分别表示严格版本、过渡版本以及基于框架的HTML 文档。<br>(2)所谓的标准模式是指，浏览器按 W3C 标准解析执行代码；怪异模式则是使用浏览器自己的方式解析执行代码，因为不同浏览器解析执行的方式不一样，所以我们称之为怪异模式。 严格模式是浏览器根据web标准去解析页面，是一种要求严格的DTD，不允许使用任何表现层的语法，如<br>。严格模式的排版和JS 运作模式是以该浏览器支持的最高标准运行混杂模式则是一种向后兼容的解析方法，说的透明点就是可以实现IE5.5以下版本浏览器的渲染模式。<br>(3)浏览器解析时到底使用标准模式还是怪异模式，与你网页中的 DTD 声明直接相关， DTD 声明定义了标准文档的类型（标准模式解析）文档类型，会使浏览器使用相应的方式加载网页并显示，忽略 DTD 声明 ,将使网页进入怪异模式。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/20/HTML+CSS一些知识点/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/Ajax和跨域问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sean">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sean">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/16/Ajax和跨域问题/" itemprop="url">ajax回顾总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T12:38:23+08:00">
-                2018-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ajax/" itemprop="url" rel="index">
-                    <span itemprop="name">ajax</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  547
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>简单的总结下ajax和跨域问题。</p>
-<p>手写原生ajax算是比较高频的面试题了，目的就是看你是否明白其原理。<br>首先是XMLHttpRequest对象，现代浏览器均支持（IE5 和 IE6 使用 ActiveXObject）。它是一个window对象。它的reponseText属性可以获取返回数据。readyState和status属性可以标识返回状态。<br>onreadystatechange是一个事件，或者说一个函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var request = new XMLHttpRequset();</span><br><span class="line">request.onreadystatechange = function () &#123;</span><br><span class="line">	if (request.readyState ==4 &amp;&amp; request.status == 200) &#123;</span><br><span class="line">			alert(requset.reponseText)//成功，返回reponseText</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">			alert(requset.status)  //失败，返回错误状态码</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">requset.get(&apos;GET&apos;, url, true) ;//默认为true，可不写。表示异步</span><br><span class="line">requset.send()</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/16/Ajax和跨域问题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/大厂面试题部分一览/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sean">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sean">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/16/大厂面试题部分一览/" itemprop="url">2018秋招部部分大厂面试题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T09:40:10+08:00">
-                2018-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/面试题/" itemprop="url" rel="index">
-                    <span itemprop="name">面试题</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  718
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>阿里一面（其实一面挺简单的，但发挥不好，面试官希望你会框架。问我react时，我一谦虚说不算很会，就不问我了，然后就挂了）：</p>
-<p>web语义化<br>meta标签作用（页面信息、搜索引擎、不同设备）认识<meta>这篇文章讲得很全面。<br>行内元素、块元素有哪些，布局<br>布局方式<br>三栏布局<br>css选择器优先级<br>http请求过程<br>http2.0了解<br>es2015了解哪些新特性(let/const,promise,class,set/map等忘了说箭头函数)<br>箭头函数和普通函数区别(this指向、不能做构造函数、不能使用arguments等)<br>异步编程(回调函数、监听/订阅、promise、async/await)<br>promise相关，规范、状态<br>百度三面(百度做了一个试题集，真是用心！！！面试感觉还是挺好的，很愉快的面试，但可怜的我并没有收到offer。另外有些面试会考手写代码，从头写到尾，不知道为什么没考我。。。)<br>百度一面：</p>
-<p>自我介绍<br>获取页面上个数top3标签<br>提取url键值对<br>console.log输出加上“hello”<br>linux bash命令cp/rm/mv/cat/ln -s/alias<br>有一个目录很深，如何很快的进入(建立软链接、设置别名？)<br>ajax跨域（cors、反向代理）<br>简述jsonp过程<br>ajax请求过程<br>两栏布局<br>css选择器优先级<br>离线缓存(manifest(貌似废弃了)、service worker(还不成熟))<br>客户端存储方式及异同<br>自定义表单，使各浏览器表现一致<br>百度二面：<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/16/大厂面试题部分一览/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2199,7 +2238,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2210,7 +2249,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2221,7 +2260,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2485,7 +2524,7 @@
 <span class="post-meta-divider">|</span>
 <div class="theme-info">
  <i class="fa fa-pencil"></i>
- <span class="post-count">博客全站共22.3k字</span>
+ <span class="post-count">博客全站共23.8k字</span>
 </div>
 <span class="post-meta-divider">|</span>
 
