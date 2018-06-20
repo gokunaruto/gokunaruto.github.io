@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[腾讯云本地开发环境搭建]]></title>
+    <url>%2F2018%2F06%2F20%2F%E8%85%BE%E8%AE%AF%E4%BA%91%E5%90%8E%E5%8F%B0%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[用mpvue开发小程序，如果自己部署，需要购买域名，空间，购买https证书，使用pm2+nginx自己部署。使用腾讯云，它的解决方案就是： koa2+mysql+wafer-sdk(腾讯小程序解决方案) 集成微信开发者工具一键上传 调试免费域名+环境 Wafer-sdk是什么呢？Wafer 的全称是 Weapp Application Fullstack Essential Resources，即微信小程序全栈基础资源。Wafer 是腾讯云面向广大开发者提供的小程序开发全栈资源套件，套件赋予小程序会话鉴权、信道服务、云资源整合等能力，在扩展性和安全性上能满足企业级的要求，同时具备低开发门槛。Wafer 服务端 SDK 是腾讯云为微信小程序开发者提供的快速开发库，SDK 封装了以下功能供小程序开发者快速调用： 用户登录与验证 信道服务 图片上传 数据库 客服消息]]></content>
+      <categories>
+        <category>腾讯云</category>
+      </categories>
+      <tags>
+        <tag>腾讯云 后台开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[mpvue生存指南]]></title>
+    <url>%2F2018%2F06%2F20%2Fmpvue%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97%2F</url>
+    <content type="text"><![CDATA[mpvue （github 地址请参见）是一个使用 Vue.js 开发小程序的前端框架。框架基于 Vue.js核心，mpvue 修改了Vue.js的 runtime 和 compiler 实现，使其可以运行在小程序环境中，从而为小程序开发引入了整套 Vue.js 开发体验。主要特性使用 mpvue 开发小程序，你将在小程序技术体系的基础上获取到这样一些能力： 彻底的组件化开发能力：提高代码复用性 完整的 Vue.js 开发体验 方便的 Vuex 数据管理方案：方便构建复杂应用 快捷的 webpack 构建机制：自定义构建策略、开发阶段 hotReload 支持使用 npm 外部依赖 使用 Vue.js 命令行工具 vue-cli 快速初始化项目 H5 代码转换编译成小程序目标代码的能力 mpvue入门 npm install -g vue-cli vue init mpvue/mpvue-quickstart my-project cd my-project npm install npm run dev 模板语法，计算属性，条件渲染。 vue语法+小程序自带组件+小程序api mpvue生命周期 vue生命周期+兼容小程序的生命周期 created创建初始化 vue不自持的，用小程序自己的，比如下拉刷新onPullDownRefresh 同 vue，不同的是我们会在小程序 onReady 后，再去触发 vue mounted 生命周期，详细的 vue 生命周期文档请看生命周期钩子 beforeCreate created beforeMount mounted beforeUpdate updated activated deactivated beforeDestroy destroyed 目录模板语法 computed+模板+html 动态style和class使用计算属性返回字符串 v-if和v-on用法不变 v-model全支持]]></content>
+      <categories>
+        <category>mpvue</category>
+      </categories>
+      <tags>
+        <tag>mpvue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[mpvue开发小程序笔记——5.mpvue入门]]></title>
     <url>%2F2018%2F06%2F15%2Fmpvue%E5%BC%80%E5%8F%91%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%945.mpvue%E5%85%A5%E9%97%A8%2F</url>
     <content type="text"><![CDATA[mpvue （github 地址请参见）是一个使用 Vue.js 开发小程序的前端框架。框架基于 Vue.js核心，mpvue 修改了Vue.js的 runtime 和 compiler 实现，使其可以运行在小程序环境中，从而为小程序开发引入了整套 Vue.js 开发体验。主要特性使用 mpvue 开发小程序，你将在小程序技术体系的基础上获取到这样一些能力： 彻底的组件化开发能力：提高代码复用性 完整的 Vue.js 开发体验 方便的 Vuex 数据管理方案：方便构建复杂应用 快捷的 webpack 构建机制：自定义构建策略、开发阶段 hotReload 支持使用 npm 外部依赖 使用 Vue.js 命令行工具 vue-cli 快速初始化项目 H5 代码转换编译成小程序目标代码的能力 mpvue入门 npm install -g vue-cli vue init mpvue/mpvue-quickstart my-project cd my-project npm install npm run dev 模板语法，计算属性，条件渲染。 vue语法+小程序自带组件+小程序api mpvue生命周期 vue生命周期+兼容小程序的生命周期 created创建初始化 vue不自持的，用小程序自己的，比如下拉刷新onPullDownRefresh 同 vue，不同的是我们会在小程序 onReady 后，再去触发 vue mounted 生命周期，详细的 vue 生命周期文档请看生命周期钩子 beforeCreate created beforeMount mounted beforeUpdate updated activated deactivated beforeDestroy destroyed 目录模板语法 computed+模板+html 动态style和class使用计算属性返回字符串 v-if和v-on用法不变 v-model全支持]]></content>
