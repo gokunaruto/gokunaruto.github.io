@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[vue做一史上最简单的todolist]]></title>
+    <url>%2F2018%2F06%2F21%2Fvue%E5%81%9A%E4%B8%80%E4%B8%AA%E5%8F%B2%E4%B8%8A%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84todolist%2F</url>
+    <content type="text"><![CDATA[用vue做一个简单的todolist应用，这应该是初学vue必经的阶段了，因为一个小小的demo里包含了挺多的vue常用的知识点。这里，我们不用vue-cli搭建，不用那些乱七八糟的工具，直接引入官网上的cdn，做一个最简单的demo。1.搭建基本的html结构，引入cdn，和我们的js。 2.写我们的js.用v-model双向绑定input和data里的inputValue，给input和button添加v-on事件。这样就完成了最基本的添加事件。3.v-for遍历list数组，双向绑定到li上面。给删除按钮添加删除事件remove直接删除此项todo就可以了。给checkbox绑定布尔值，来切换完成状态，span绑定class来显示完成状态。 好了，到了这里基本完成了添加，删除，改变完成状态这几个功能了。但是如果关闭了网页，之前添加的记录都会被删除。此时我们就可以用localStrorage来保存我们之前记录的数据。除非主动去删除，否则这些记录就会被一直保存着。localStorage的用法如下：localStorage.setItem(key, val)存储变量名为key，值为val的变量。key,val均为字符串。localStorage.getItem(key)提取变量名为key的值如果val为数组或者对象咋办，用JSON.stringify()将其转换成字符串。12345678910function set(key, val) &#123; localStorage.setItem(key, JSON.stringify(val));&#125;function get(key) &#123; return JSON.parse(localStorage.getItem(key));&#125;var myStorage = &#123; set: set, get: get&#125;; 分别将两种方法封装，直接调用即可。用watch函数监控list的变化。123456789101112watch: &#123; list: &#123; deep: true, handler: function (newVal, oldVal) &#123; if(newVal) &#123; myStorage.set(&apos;list&apos;, newVal) &#125;else&#123; myStorage.set(&apos;list&apos;, oldVal) &#125; &#125; &#125; &#125; 在钩子函数中调用myStorage.get()方法，赋值给data里的list即可达到保存list数据的目的。123mounted: function()&#123; this.list = myStorage.get(&apos;list&apos;) || [];&#125;, 好，到这里基本完成了一些简单的功能，用到了v-model,v-on,v-for,v-bind指令。data,mounted,methods,watch函数。html5的localStorage技术。这算是一个史上最简单明了的vue-todolist了。当然里面bug很多。比如输入框不输入任何东西也能添加记录。本人知识有限，这个也仅仅是个练手demo。这些等以后再慢慢更新。过段时间我会写个更加完善更加美观的todolist。]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>vue todolist</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[腾讯云本地开发环境搭建]]></title>
     <url>%2F2018%2F06%2F20%2F%E8%85%BE%E8%AE%AF%E4%BA%91%E5%90%8E%E5%8F%B0%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%2F</url>
     <content type="text"><![CDATA[用mpvue开发小程序，如果自己部署，需要购买域名，空间，购买https证书，使用pm2+nginx自己部署。使用腾讯云，它的解决方案就是： koa2+mysql+wafer-sdk(腾讯小程序解决方案) 集成微信开发者工具一键上传 调试免费域名+环境 Wafer-sdk是什么呢？Wafer 的全称是 Weapp Application Fullstack Essential Resources，即微信小程序全栈基础资源。Wafer 是腾讯云面向广大开发者提供的小程序开发全栈资源套件，套件赋予小程序会话鉴权、信道服务、云资源整合等能力，在扩展性和安全性上能满足企业级的要求，同时具备低开发门槛。Wafer 服务端 SDK 是腾讯云为微信小程序开发者提供的快速开发库，SDK 封装了以下功能供小程序开发者快速调用： 用户登录与验证 信道服务 图片上传 数据库 客服消息]]></content>
